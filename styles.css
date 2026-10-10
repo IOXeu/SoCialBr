@@ -1,219 +1,289 @@
-:root{
-  --purple:#5b1f86;
-  --purple-dark:#3f1264;
-  --purple-mid:#7b35a5;
-  --pink:#e51b7a;
-  --pink-dark:#b70f5d;
-  --gold:#e2b33d;
-  --cream:#fffdf8;
-  --lav:#eee7f3;
-  --line:#cbbbd2;
-  --text:#3d3142;
-  --muted:#786b80;
-  --white:#fff;
+/* ==========================================================================
+   PART 1: CONFIGURAÇÕES BASE, TEMA ORIGINAL E TEMA HARDROCK
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. CONFIGURAÇÕES PADRÃO DO PROGRAMA
+   -------------------------------------------------------------------------- */
+body {
+    margin: 0; padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    transition: background-color 0.3s, color 0.3s; /* Transição suave ao trocar */
 }
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:var(--lav);color:var(--text)}
-body{font:13px/1.45 Arial,Helvetica,sans-serif}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-.top{
-  background:linear-gradient(#6f2b98 0,#542078 55%,#451661 100%);
-  color:#fff;
-  border-bottom:3px solid var(--gold);
-  box-shadow:0 2px 5px #2d123b55
+.conteudo-principal {
+    display: grid;
+    grid-template-columns: 280px 1fr 300px;
+    gap: 20px; padding: 20px;
 }
-.topi{
-  width:min(1000px,calc(100% - 24px));
-  margin:auto;
-  min-height:62px;
-  display:flex;
-  align-items:center;
-  gap:16px;
-  padding:7px 8px
+.bloco-painel { overflow: hidden; }
+
+/* --------------------------------------------------------------------------
+   1. TEMA BASE: O ROXÃO ORIGINAL (Padrão do Social Br)
+   -------------------------------------------------------------------------- */
+body, body.tema-original {
+    background-color: #1F1625; color: #FFFFFF;
 }
-.brand{display:flex;align-items:center;gap:7px;font-size:25px;font-weight:bold;letter-spacing:-1px;white-space:nowrap;text-shadow:0 1px 1px #0006}
-.brand img{width:40px;height:40px;object-fit:contain}
-.brand i{font-style:normal;color:#76e69a}
-.search{flex:1;max-width:380px}
-.search input{
-  width:100%;height:31px;padding:5px 11px;border:1px solid #37124c;border-radius:3px;
-  background:#fff;color:#555;box-shadow:inset 0 1px 2px #0002
+.tema-original header {
+    background-color: #3D1B54; border-bottom: 2px solid #5C2A7D;
 }
-.tu{margin-left:auto;display:flex;align-items:center;gap:7px;font-weight:bold}
-.av{
-  width:38px;height:38px;border-radius:3px;display:inline-grid;place-items:center;
-  background:linear-gradient(#e94391,#c41568);color:#fff;border:2px solid #fff;
-  font-weight:bold;flex:none;box-shadow:0 1px 2px #0004
+.tema-original .bloco-painel {
+    background-color: #2A1B35; border: 1px solid #4A2665; border-radius: 8px;
 }
-.page{width:min(1000px,calc(100% - 24px));margin:auto;padding:9px 0 45px}
-.nav{
-  display:flex;align-items:center;gap:0;flex-wrap:wrap;
-  background:#fff;border:1px solid var(--line);border-top:0;
-  box-shadow:0 1px 3px #0002;padding:0 7px
+.tema-original .titulo-bloco {
+    background-color: #3D1B54; color: #E0B0FF;
 }
-.nav button{
-  border:0;border-right:1px solid #e6dce9;background:transparent;
-  color:var(--purple);padding:9px 14px;font-weight:bold;border-radius:0
-}
-.nav button:first-child{border-left:1px solid #e6dce9}
-.nav button.active,.nav button:hover{background:#f7edf8;color:var(--pink-dark);text-decoration:underline}
-.layout{
-  display:grid;
-  grid-template-columns:185px minmax(0,1fr) 220px;
-  gap:10px;margin-top:10px;align-items:start
-}
-.col{display:grid;gap:10px;align-content:start}
-.card{
-  background:var(--cream);border:1px solid var(--line);border-radius:2px;
-  box-shadow:0 1px 3px #43204f18;padding:11px
-}
-.pf{text-align:left;padding:0 0 11px;overflow:hidden}
-.pf .av{width:72px;height:72px;border-radius:3px;margin:0 auto;display:grid;font-size:22px;border:3px solid #fff;box-shadow:0 1px 3px #0004}
-.pf h2{font-size:18px;margin:8px 10px 1px;color:var(--purple)}
-.pf p{margin:0 10px;color:var(--muted)}
-.menu{padding:4px;background:#fff}
-.menu button{
-  width:100%;border:0;border-bottom:1px solid #eee4f0;background:#fff;
-  text-align:left;color:#4e3c54;padding:7px 8px;border-radius:0
-}
-.menu button:last-child{border-bottom:0}
-.menu button:hover{background:#f8eff9;color:var(--pink-dark)}
-.title{
-  display:flex;justify-content:space-between;align-items:center;
-  border-bottom:1px solid #d8c9df;padding:0 0 6px;margin-bottom:8px
-}
-.title strong{color:var(--purple);font-size:15px}
-.title small,.muted{color:var(--muted)}
-.gb{
-  background:linear-gradient(#fff,#f8f1fa);border:1px solid var(--line);
-  border-left:4px solid var(--pink);padding:8px 10px;border-radius:2px;
-  display:flex;justify-content:space-between;align-items:center;gap:10px
-}
-.gb small{font-size:10px;color:#8a718f;font-weight:bold;letter-spacing:.5px}
-.gb strong{color:var(--purple);font-size:17px}
-.gb select{border:1px solid #c8b8cf;padding:5px 7px;border-radius:2px;background:#fff;color:var(--text)}
-.composer{padding:10px;background:#fff}
-.composer textarea{
-  width:100%;min-height:70px;border:1px solid #c8b8cf;border-radius:2px;
-  padding:8px;resize:vertical;background:#fff
-}
-.composer textarea:focus{outline:1px solid var(--purple)}
-.act{text-align:right;margin-top:6px}
-.primary{
-  background:linear-gradient(#e94391,#c81668);color:#fff;border:1px solid #a90e56;
-  border-radius:2px;padding:6px 13px;font-weight:bold;box-shadow:0 1px 1px #0002
-}
-.primary:hover{background:linear-gradient(#ef579d,#b90f5d)}
-.secondary{
-  background:linear-gradient(#fff,#f2edf4);color:var(--purple);
-  border:1px solid #c7b6cf;border-radius:2px;padding:5px 9px;font-weight:bold
-}
-.post{padding:10px;background:#fff}
-.ph{display:flex;gap:8px;align-items:center;border-bottom:1px solid #eee7f0;padding-bottom:7px}
-.ph .av{width:32px;height:32px;border-radius:3px}
-.ph b{color:var(--purple)}
-.ph small{display:block;color:var(--muted);font-size:11px}
-.body{white-space:pre-wrap;overflow-wrap:anywhere;margin:9px 2px 2px}
-.member{
-  display:flex;align-items:center;gap:7px;padding:6px 0;
-  border-bottom:1px solid #eee7f0
-}
-.member:last-child{border-bottom:0}
-.member .av{width:28px;height:28px;border-radius:3px;font-size:10px}
-.invite{
-  background:linear-gradient(#fff9fd,#fff);
-  border-top:3px solid var(--pink)
-}
-.invite h3{margin:0 0 4px;color:var(--pink-dark);font-size:15px}
-.people{display:grid;grid-template-columns:1fr;gap:0}
-.person{
-  display:flex;align-items:center;gap:8px;border-bottom:1px solid #eee7f0;
-  padding:7px 2px
-}
-.person .av{width:30px;height:30px;border-radius:3px}
-.person small{display:block;color:var(--muted)}
-.hero{min-height:75vh;display:grid;place-items:center;padding:30px 10px}
-.hero-card{
-  width:min(440px,100%);background:#fff;border:1px solid var(--line);
-  border-radius:2px;box-shadow:0 4px 18px #35124f25;
-  border-top:5px solid var(--purple);padding:28px;text-align:center
-}
-.hero-logo{width:min(230px,75%);max-height:135px;object-fit:contain}
-.hero-card h1{color:var(--purple);font-size:25px;margin:12px 0 5px}
-.form{display:grid;gap:8px;text-align:left;margin-top:16px}
-.form label{font-weight:bold;color:var(--purple)}
-.form input{width:100%;border:1px solid #c8b8cf;border-radius:2px;padding:8px}
-.page h1{font-size:21px;color:var(--purple);margin:4px 0}
-.profile-card{overflow:visible}
-.cover{height:150px;background:linear-gradient(120deg,var(--purple-dark),var(--purple-mid),var(--pink));border-radius:2px 2px 0 0;position:relative;z-index:0}
-.pm{display:flex;position:relative;z-index:1;gap:12px;align-items:center;margin-top:-26px;padding:0 13px 18px}
-.pm .av{width:68px;height:68px;flex:none;position:relative;z-index:2;border-radius:50%;object-fit:cover}
-.pm h1{margin:8px 0 0;line-height:1.25}
-.pm>div{min-width:0}
-.pm .photo-btn{flex:none;position:relative;z-index:2}
-.toast{
-  position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
-  background:var(--purple-dark);color:#fff;border:1px solid var(--gold);
-  padding:8px 15px;border-radius:3px;z-index:100;box-shadow:0 2px 8px #0004
-}
-@media(max-width:850px){
-  .layout{grid-template-columns:170px minmax(0,1fr)}
-  .right{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr}
-}
-@media(max-width:650px){
-  .cover{height:125px}
-  .pm{margin-top:-22px;gap:10px;padding-left:10px;padding-right:10px}
-  .pm .av{width:60px;height:60px}
-  .topi{width:100%;padding:6px 9px}
-  .brand{font-size:21px}
-  .brand img{width:34px;height:34px}
-  .search{display:none}
-  .tu span{display:none}
-  .page{width:100%;padding:7px 7px 35px}
-  .nav{overflow:auto;flex-wrap:nowrap}
-  .nav button{white-space:nowrap;padding:8px 11px}
-  .layout{grid-template-columns:1fr}
-  .left,.right{display:block}
-  .people{grid-template-columns:1fr 1fr}
-  .gb{align-items:flex-start;flex-direction:column}
-  .gb select{width:100%}
+.tema-original .btn-principal {
+    background-color: #7D3C98; color: #FFFFFF; border: none;
 }
 
-.av-photo{object-fit:cover;display:inline-block;vertical-align:middle}
-.pf .av-photo{width:72px;height:72px}
-.ph .av-photo{width:32px;height:32px}
-.member .av-photo,.person .av-photo{width:28px;height:28px}
-.photo-btn{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid #c7b6cf;color:var(--purple);padding:5px 8px;border-radius:2px;font-weight:bold;cursor:pointer;font-size:12px}
-.pm .photo-btn{margin-left:auto}
-.cover{position:relative;background-size:cover;background-position:center}
-.cover .photo-btn{position:absolute;right:8px;top:8px;background:#ffffffdd}
+/* --------------------------------------------------------------------------
+   2. TEMA 1: HARDROCK 🎸 (Estilo Noturno com Bordas Iluminadas)
+   -------------------------------------------------------------------------- */
+body.tema-hardrock {
+    background-color: #121212 !important; color: #FFFFFF !important;
+    font-family: 'Trebuchet MS', sans-serif;
+}
+.tema-hardrock header {
+    background-color: #2B064D !important; border-bottom: 2px solid #4C007D !important;
+}
+.tema-hardrock .bloco-painel {
+    background-color: #000000 !important; border: 1px solid #4C007D !important; border-radius: 8px;
+}
+.tema-hardrock .titulo-bloco {
+    background-color: #2B064D !important; color: #FFD700 !important;
+}
+.tema-hardrock .btn-principal {
+    background: linear-gradient(135deg, #4C007D, #2B064D) !important;
+    border: 1px solid #FFD700 !important; color: #FFFFFF !important;
+}
+/* ==========================================================================
+   PART 2: TEMA PRIMAVERIL E TEMA SUAVE ROMÂNTICO ORIENTAL
+   ========================================================================== */
 
-/* Aparência: modelos e 12 temas */
-body[data-theme="1"]{--purple:#9b185b;--purple-dark:#68103d;--purple-mid:#d23b88;--pink:#ff4aa2;--pink-dark:#b51264;--gold:#f0c45a}
-body[data-theme="2"]{--purple:#234a86;--purple-dark:#102c59;--purple-mid:#326bb8;--pink:#4e9cff;--pink-dark:#2467b8;--gold:#7fc9ff}
-body[data-theme="3"]{--purple:#286b4d;--purple-dark:#17452f;--purple-mid:#3e916c;--pink:#35b978;--pink-dark:#218452;--gold:#d5c45a}
-body[data-theme="4"]{--purple:#76551c;--purple-dark:#49320d;--purple-mid:#a47b2b;--pink:#b8862d;--pink-dark:#795918;--gold:#f1ce6b}
-body[data-theme="5"]{--purple:#70243a;--purple-dark:#431322;--purple-mid:#9b3454;--pink:#d94b72;--pink-dark:#a72b50;--gold:#e3b05b}
-body[data-theme="6"]{--purple:#2c6890;--purple-dark:#18445f;--purple-mid:#428bb6;--pink:#e68a65;--pink-dark:#b75d3e;--gold:#f1d27b}
-body[data-theme="7"]{--purple:#66518b;--purple-dark:#3d2e5d;--purple-mid:#8067aa;--pink:#b477cf;--pink-dark:#77449a;--gold:#dbc36f}
-body[data-theme="8"]{--purple:#14766e;--purple-dark:#0b4944;--purple-mid:#25968b;--pink:#26b8a8;--pink-dark:#167c73;--gold:#e2c85e}
-body[data-theme="9"]{--purple:#424852;--purple-dark:#252a31;--purple-mid:#626b77;--pink:#8994a3;--pink-dark:#58616e;--gold:#c9b36a}
-body[data-theme="10"]{--purple:#87552d;--purple-dark:#55331d;--purple-mid:#ae7440;--pink:#d08349;--pink-dark:#9e5b2e;--gold:#e2bf6b}
-body[data-theme="11"]{--purple:#8b4b3e;--purple-dark:#572b25;--purple-mid:#b86b57;--pink:#e29170;--pink-dark:#b65b42;--gold:#f0c66e}
-body[data-model="compacto"] .layout{grid-template-columns:145px minmax(0,1fr) 180px;gap:7px}
-body[data-model="compacto"] .card{padding:8px}
-body[data-model="compacto"] .nav button{padding:7px 10px}
-body[data-model="largo"] .layout{grid-template-columns:210px minmax(0,1fr) 250px}
-.appearance-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
-.model-card,.theme-card{border:1px solid var(--line);background:#fff;border-radius:3px;padding:8px;text-align:left;color:var(--text)}
-.model-card.selected,.theme-card.selected{border:2px solid var(--pink);box-shadow:0 0 0 2px #e51b7a22}
-.model-preview{height:70px;display:block;border:1px solid #d5c8da;border-radius:2px;margin-bottom:7px;background:#eee}
-.model-preview.classico{background:linear-gradient(90deg,#ddd 20%,#fff 20%,#fff 80%,#ddd 80%)}
-.model-preview.compacto{background:linear-gradient(90deg,#ccc 15%,#fff 15%,#fff 85%,#ccc 85%)}
-.model-preview.largo{background:linear-gradient(90deg,#ccc 24%,#fff 24%,#fff 76%,#ccc 76%)}
-.theme-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.theme-title{margin-top:20px}
-.theme-card span{display:block;height:32px;border-radius:2px;margin-bottom:5px;background:var(--purple)}
-.theme-card.t1 span{background:#9b185b}.theme-card.t2 span{background:#234a86}.theme-card.t3 span{background:#286b4d}.theme-card.t4 span{background:#76551c}.theme-card.t5 span{background:#70243a}.theme-card.t6 span{background:#2c6890}.theme-card.t7 span{background:#66518b}.theme-card.t8 span{background:#14766e}.theme-card.t9 span{background:#424852}.theme-card.t10 span{background:#87552d}.theme-card.t11 span{background:#8b4b3e}
-@media(max-width:650px){.appearance-grid,.theme-grid{grid-template-columns:1fr 1fr}body[data-model="largo"] .layout,body[data-model="compacto"] .layout{grid-template-columns:1fr}}
+/* --------------------------------------------------------------------------
+   3. TEMA 2: PRIMAVERIL 🌸 (Rosa Imperial e Detalhes Verde-Jardim)
+   -------------------------------------------------------------------------- */
+body.tema-primaveril {
+    background-color: #FDF6F8 !important; color: #2C1A20 !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.tema-primaveril header {
+    background-color: #E91E63 !important; border-bottom: 3px solid #76D7C4 !important;
+}
+.tema-primaveril .bloco-painel {
+    background-color: #FFFFFF !important; border: 1px solid #F5B7B1 !important; border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(233,30,99,0.05);
+}
+.tema-primaveril .titulo-bloco {
+    background-color: #FADBD8 !important; color: #78281F !important; font-weight: bold;
+    border-bottom: 1px solid #F5B7B1 !important;
+}
+.tema-primaveril .sub-aba.ativa {
+    background-color: #76D7C4 !important; color: #FFFFFF !important;
+}
+.tema-primaveril .btn-principal {
+    background: linear-gradient(135deg, #76D7C4, #117864) !important;
+    border: none !important; color: #FFFFFF !important; font-weight: bold;
+}
+
+/* --------------------------------------------------------------------------
+   4. TEMA 3: SUAVE ROMÂNTICO ORIENTAL 🌅 (Pôr do Sol e Traços de Pincel)
+   -------------------------------------------------------------------------- */
+body.tema-romantico {
+    background: linear-gradient(180deg, #FFF2E6 0%, #FFE6EE 100%) !important;
+    background-attachment: fixed !important; color: #4A353B !important;
+}
+.tema-romantico header {
+    background-color: #FFB3A7 !important; border-bottom: 3px solid #E07A5F !important;
+}
+.tema-romantico .bloco-painel {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    border-top: 3px solid #2C2C2C !important; border-bottom: 4px solid #4A4A4A !important;
+    border-left: 1px solid #666666 !important; border-right: 2px solid #333333 !important;
+    border-radius: 12px 4px 15px 6px !important; /* Desalinhamento da caligrafia */
+}
+.tema-romantico .titulo-bloco {
+    background-color: #FFE6EE !important; color: #6B2D1C !important;
+    font-family: 'Georgia', serif; border-bottom: 2px solid #E07A5F !important;
+}
+.tema-romantico .sub-aba.ativa {
+    background-color: #E07A5F !important; color: #FFFFFF !important; border-radius: 20px;
+}
+.tema-romantico .btn-principal {
+    background: linear-gradient(135deg, #E07A5F, #C35A3E) !important;
+    border: none !important; color: #FFFFFF !important; border-radius: 20px !important;
+}
+/* ==========================================================================
+   PART 3: TEMA DARKZOMBIE E TEMA RETRO ANOS 50 (NACIONAL)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   5. TEMA 4: DARKZOMBIE 🧟 (Terror, Seringas e Mãozinha de Zumbi)
+   -------------------------------------------------------------------------- */
+body.tema-darkzombie {
+    background-color: #111311 !important; color: #FFFFFF !important;
+    font-family: 'Arial', sans-serif;
+    cursor: url('https://icons8.com'), auto !important;
+}
+.tema-darkzombie a, .tema-darkzombie button, .tema-darkzombie .cartao-tema {
+    cursor: url('https://icons8.com'), pointer !important;
+}
+.tema-darkzombie header {
+    background-color: #0A150D !important; border-bottom: 3px solid #FF1744 !important;
+}
+.tema-darkzombie .bloco-painel {
+    background-color: #000000 !important; border: 2px solid #2E3B2E !important; border-radius: 6px !important;
+}
+.tema-darkzombie .titulo-bloco {
+    background-color: #141F16 !important; color: #39FF14 !important;
+    font-family: 'Impact', sans-serif; border-bottom: 2px solid #2E3B2E !important;
+}
+.tema-darkzombie .sub-aba.ativa {
+    background-color: #990000 !important; color: #FFFFFF !important;
+}
+.tema-darkzombie .btn-principal {
+    background: linear-gradient(135deg, #D50000, #990000) !important;
+    border: 1px solid #FF1744 !important; color: #FFFFFF !important;
+    font-family: 'Impact', sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   6. TEMA 5: RETRO ANOS 50 📻 (Anos Dourados, Verde-Menta e Ouro)
+   -------------------------------------------------------------------------- */
+body.tema-anos50 {
+    background-color: #F7F4EB !important; color: #2F3E3A !important;
+    font-family: 'Georgia', serif;
+}
+.tema-anos50 header {
+    background-color: #A2D2C8 !important; border-bottom: 5px solid #FFD700 !important;
+}
+.tema-anos50 .bloco-painel {
+    background-color: #FFFDF9 !important; border: 6px ridge #B8860B !important;
+    border-radius: 0px !important; box-shadow: 4px 4px 0px rgba(0,0,0,0.15) !important;
+}
+.tema-anos50 .titulo-bloco {
+    background-color: #A2D2C8 !important; color: #2F3E3A !important;
+    font-family: 'Times New Roman', serif; border-bottom: 3px double #B8860B !important;
+}
+.tema-anos50 .sub-aba.ativa {
+    background-color: #FFD700 !important; color: #2F3E3A !important;
+}
+.tema-anos50 .btn-principal {
+    background-color: #FFD700 !important; border: 2px solid #2F3E3A !important;
+    color: #2F3E3A !important; font-family: 'Times New Roman', serif;
+}
+/* ==========================================================================
+   PART 4: TEMA RETRO ANOS 60 E TEMA TEXAS COWBOY/SERTANEJO
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   7. TEMA 6: RETRO ANOS 60 🪩 (Jovem Guarda, Curvas Pop Art e Pastilhas)
+   -------------------------------------------------------------------------- */
+body.tema-anos60 {
+    background-color: #FAF5EF !important; color: #3E2723 !important;
+    font-family: 'Trebuchet MS', sans-serif;
+}
+.tema-anos60 header {
+    background-color: #E67E22 !important; border-bottom: 5px solid #F1C40F !important;
+}
+.tema-anos60 .bloco-painel {
+    background-color: #FFFFFF !important; border: 4px solid #3E2723 !important;
+    border-radius: 25px !important; box-shadow: 5px 5px 0px #F1C40F !important;
+}
+.tema-anos60 .titulo-bloco {
+    background-color: #F1C40F !important; color: #3E2723 !important;
+    font-family: 'Impact', sans-serif; border-bottom: 4px solid #3E2723 !important;
+}
+.tema-anos60 .sub-aba.ativa {
+    background-color: #E67E22 !important; color: #FFFFFF !important;
+}
+.tema-anos60 .btn-principal {
+    background: linear-gradient(135deg, #E67E22, #D35400) !important;
+    border: 3px solid #3E2723 !important; color: #FFFFFF !important;
+    border-radius: 25px !important; font-family: 'Impact', sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   8. TEMA 7: TEXAS COWBOY / SERTANEJO 🤠 (Bruto, Rústico e Camurça)
+   -------------------------------------------------------------------------- */
+body.tema-sertanejo {
+    background-color: #EED9B3 !important; color: #362217 !important;
+    font-family: 'Georgia', serif;
+}
+.tema-sertanejo header {
+    background-color: #4E3629 !important; border-bottom: 4px solid #B85A32 !important;
+}
+.tema-sertanejo .bloco-painel {
+    background-color: #FFFDF9 !important; border: 4px solid #4E3629 !important;
+    border-radius: 6px !important; box-shadow: 4px 4px 0px rgba(78,54,41,0.2) !important;
+}
+.tema-sertanejo .titulo-bloco {
+    background-color: #4E3629 !important; color: #FFF2D7 !important;
+    font-family: 'Impact', sans-serif; border-bottom: 2px solid #B85A32 !important;
+}
+.tema-sertanejo .sub-aba.ativa {
+    background-color: #B85A32 !important; color: #FFFFFF !important;
+}
+.tema-sertanejo .btn-principal {
+    background-color: #B85A32 !important; border: 2px solid #4E3629 !important;
+    color: #FFFFFF !important; font-family: 'Impact', sans-serif;
+}
+/* ==========================================================================
+   AUTOMAÇÃO DE TROCA DE APARÊNCIA - 8 TEMAS OFICIAIS
+   ========================================================================== */
+
+// 1. Lista com todos os nomes das roupas (classes) do nosso catálogo
+const todosOsTemas = [
+    'tema-original', 
+    'tema-hardrock', 
+    'tema-primaveril', 
+    'tema-romantico', 
+    'tema-darkzombie', 
+    'tema-anos50', 
+    'tema-anos60', 
+    'tema-sertanejo'
+];
+
+// 2. Função inteligente que limpa o tema antigo e veste o novo
+function aplicarNovoTema(nomeDoTema) {
+    // Remove todas as roupas antigas de uma vez só
+    document.body.classList.remove(...todosOsTemas);
+    
+    // Veste a nova roupa escolhida pelo usuário
+    if (nomeDoTema !== 'tema-original') {
+        document.body.classList.add(nomeDoTema);
+    }
+    
+    // Salva a escolha no navegador para o usuário não perder o tema ao atualizar
+    localStorage.setItem('socialbr-tema-salvo', nomeDoTema);
+}
+
+// 3. Deixa o sistema ouvindo os cliques do mouse em cada cartão
+document.addEventListener('DOMContentLoaded', () => {
+    // Tenta carregar o último tema que o usuário deixou salvo ao abrir a página
+    const temaSalvo = localStorage.getItem('socialbr-tema-salvo');
+    if (temaSalvo) {
+        aplicarNovoTema(temaSalvo);
+    }
+
+    // Mapeia os cliques do mouse nos botões do catálogo real
+    configurarCliqueTema('.btn-tema-original', 'tema-original');
+    configurarCliqueTema('.btn-tema-hardrock', 'tema-hardrock');
+    configurarCliqueTema('.btn-tema-primaveril', 'tema-primaveril');
+    configurarCliqueTema('.btn-tema-romantico', 'tema-romantico');
+    configurarCliqueTema('.btn-tema-darkzombie', 'tema-darkzombie');
+    configurarCliqueTema('.btn-tema-anos50', 'tema-anos50');
+    configurarCliqueTema('.btn-tema-anos60', 'tema-anos60');
+    configurarCliqueTema('.btn-tema-sertanejo', 'tema-sertanejo');
+});
+
+// Função auxiliar simples para ligar o clique do botão à troca de roupa
+function configurarCliqueTema(botaoClasse, classeTema) {
+    const botao = document.querySelector(botaoClasse);
+    if (botao) {
+        botao.addEventListener('click', (evento) => {
+            evento.preventDefault();
+            aplicarNovoTema(classeTema);
+        });
+    }
+}
