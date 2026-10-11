@@ -1,40 +1,22 @@
-// SoCialBr - App limpo, tema transforma TUDO
-const K='sb_token', C='sb_convite'; let me=null;
-const api=async(p,b,m)=>{const r=await fetch('/api/'+p,{method:m||(b?'POST':'GET'),headers:{'content-type':'application/json',authorization:'Bearer '+(localStorage[K]||'')},body:b?JSON.stringify(b):undefined});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.erro||'Erro');return d};
-const h=(t,a,...k)=>{const e=document.createElement(t);if(a)Object.assign(e,a);k.flat().forEach(x=>e.append(x??''));return e};
-const show=(...k)=>{document.getElementById('app').replaceChildren(...k)};
-
-const temas=[
- {id:'zombie',nome:'Dark Zombie',emoji:'🧟'},
- {id:'glitter',nome:'Retro Glitter',emoji:'💜'},
- {id:'emo',nome:'Emo 2007',emoji:'🖤'},
- {id:'gamer',nome:'Gamer Neon',emoji:'🎮'},
- {id:'kawaii',nome:'Kawaii',emoji:'💖'},
- {id:'brasil',nome:'Brasil',emoji:'🇧🇷'},
-];
-
-function aplicarTema(id){
- localStorage.setItem('sb_theme',id);
- document.body.dataset.theme=id;
+/* SoCialBr - TUDO transforma com a capa - 8 temas oficiais */
+:root{
+ --bg:#1F1625;--panel:#2A1B35;--header:#3D1B54;--title:#3D1B54;--btn:#7D3C98;
+ --text:#fff;--line:#4A2665;--accent:#E0B0FF;--radius:8px;--font:'Segoe UI',Arial;
+ --cover:none;
 }
+*{transition:background .5s, color .3s, border-color .5s, box-shadow .5s, border-radius .3s}
+body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:var(--font);background-image:var(--cover)}
+header{background:var(--header)!important;border-bottom:2px solid var(--line)!important}
+.bloco-painel{background:var(--panel)!important;border:1px solid var(--line)!important;border-radius:var(--radius)!important;overflow:hidden;box-shadow:0 8px 24px #0003}
+.titulo-bloco{background:var(--title)!important;color:var(--accent)!important}
+.btn-principal{background:var(--btn)!important;color:#fff!important;border-radius:var(--radius)!important;box-shadow:0 4px 12px #0004}
 
-async function start(){
- const q=new URLSearchParams(location.search).get('convite'); if(q){localStorage[C]=q;history.replaceState(null,'','/')}
- if(!localStorage[K]) return entrar();
- try{me=await api('eu')}catch{localStorage.removeItem(K);return entrar()}
- if(localStorage[C]){try{const r=await api('convites/aceitar',{token:localStorage[C]});localStorage.removeItem(C);return grupo(r.group_id)}catch{}}
- lista();
-}
-function entrar(){
- const n=h('input',{placeholder:'Seu nome'}); show(h('div',{className:'card'},h('h2',0,'Bem-vindo ao SoCialBr'),n,h('button',{className:'primary',onclick:async()=>{const r=await api('registrar',{nome:n.value});localStorage[K]=r.token;start()}},'Entrar')));
-}
-async function lista(){
- const gs=await api('grupos').catch(()=>[]);
- const temaAtual=localStorage.getItem('sb_theme')||'gamer';
- const aparencia=h('div',{className:'card'},h('h3',0,'Escolha seu estilo - TUDO vira esse tema'),h('div',{style:'display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px'},...temas.map(t=>{const b=h('button',{className:temaAtual===t.id?'primary':'',style:'padding:16px'},t.emoji+' '+t.nome);b.onclick=()=>{aplicarTema(t.id);lista()};return b})),h('small',0,'Ao escolher, fundo, botões, bordas, tudo transforma. Era isso que você queria!'));
- show(h('div',{},h('small',0,'Olá, '+me.nome),aparencia,...gs.map(g=>h('div',{className:'card'},g.nome,h('button',{className:'primary',onclick:()=>grupo(g.id)},'Abrir')))));
-}
-
-document.getElementById('tabs').onclick=e=>{if(e.target.dataset.tab==='aparencia'){const t=localStorage.getItem('sb_theme')||'gamer';aplicarTema(t); lista()}};
-aplicarTema(localStorage.getItem('sb_theme')||'gamer');
-start();
+/* TEMAS - agora tudo herda as variáveis */
+body.tema-original{--bg:#1F1625;--panel:#2A1B35;--header:#3D1B54;--title:#3D1B54;--btn:#7D3C98;--line:#4A2665;--accent:#E0B0FF;--font:'Segoe UI',Arial}
+body.tema-hardrock{--bg:#121212;--panel:#000;--header:#2B064D;--title:#2B064D;--btn:linear-gradient(135deg,#4C007D,#2B064D);--line:#4C007D;--accent:#FFD700;--radius:8px;--font:'Trebuchet MS',sans-serif;--cover:radial-gradient(circle at 50% 0%,#2B064D 0%,#121212 60%)}
+body.tema-primaveril{--bg:#FDF6F8;--panel:#fff;--header:#E91E63;--title:#FADBD8;--btn:linear-gradient(135deg,#76D7C4,#117864);--line:#F5B7B1;--accent:#78281F;--text:#2C1A20;--radius:12px}
+body.tema-romantico{--bg:linear-gradient(180deg,#FFF2E6 0%,#FFE6EE 100%);--panel:rgba(255,255,255,.9);--header:#FFB3A7;--title:#FFE6EE;--btn:linear-gradient(135deg,#E07A5F,#C35A3E);--line:#E07A5F;--accent:#6B2D1C;--text:#4A353B;--radius:12px 4px 15px 6px}
+body.tema-darkzombie{--bg:#111311;--panel:#000;--header:#0A150D;--title:#141F16;--btn:linear-gradient(135deg,#D50000,#990000);--line:#2E3B2E;--accent:#39FF14;--radius:6px;--font:Impact,Arial;--cover:repeating-linear-gradient(0deg,transparent 0 2px,rgba(57,255,20,.04) 2px 3px)}
+body.tema-anos50{--bg:#F7F4EB;--panel:#FFFDF9;--header:#A2D2C8;--title:#A2D2C8;--btn:#FFD700;--line:#B8860B;--accent:#2F3E3A;--text:#2F3E3A;--radius:0px;--font:Georgia,serif}
+body.tema-anos60{--bg:#FAF5EF;--panel:#fff;--header:#E67E22;--title:#F1C40F;--btn:linear-gradient(135deg,#E67E22,#D35400);--line:#3E2723;--accent:#3E2723;--radius:25px;--font:'Trebuchet MS',sans-serif}
+body.tema-sertanejo{--bg:#EED9B3;--panel:#FFFDF9;--header:#4E3629;--title:#4E3629;--btn:#B85A32;--line:#4E3629;--accent:#FFF2D7;--text:#362217;--radius:6px}
