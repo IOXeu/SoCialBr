@@ -1,4 +1,23 @@
-:root{--purple:#39205f;--purple-dark:#21143d;--purple-mid:#65429a;--pink:#b58a42;--pink-dark:#896329;--gold:#d8b76a;--cream:#fffefa;--lav:#f3eff8;--line:#e1d9e9;--text:#292336;--muted:#827b8d}
+/* SoCialBr - Tudo transforma com a capa */
+:root{--ui-bg:#071326;--ui-panel:#0d1b33;--ui-panel-2:#122342;--ui-line:#23385e;--ui-text:#edf3ff;--ui-muted:#aab8d3;--ui-accent:#00E5FF;--ui-accent-2:#a855f7;--ui-glow:#00E5FF33;--ui-radius:16px}
+*{box-sizing:border-box;transition:background.5s,border-color.5s,color.3s,box-shadow.5s}
+body{background:var(--ui-bg);color:var(--ui-text);font:14px/1.6 Inter,system-ui}
+body::before{content:'';position:fixed;inset:0;background:var(--cover-img, none) center/cover no-repeat;opacity:.18;mix-blend-mode:soft-light;pointer-events:none;z-index:-1;transition:all.8s}
+
+/* TEMAS - quando escolhe capa, tudo muda */
+body[data-theme="zombie"]{--ui-bg:#0a0a14;--ui-panel:#141423;--ui-accent:#7FFF00;--ui-accent-2:#3cff00;--ui-line:#7FFF00;--ui-glow:0 0 12px #7FFF00;--ui-radius:4px}
+body[data-theme="glitter"]{--ui-bg:#2A1F3B;--ui-panel:#3a2e57;--ui-accent:#8A5CC8;--ui-accent-2:#FFD166;--ui-glow:0 0 20px #8A5CC8}
+body[data-theme="emo"]{--ui-bg:#0a0a0a;--ui-panel:#151515;--ui-accent:#6a2a8a;--ui-accent-2:#ff1a4a}
+body[data-theme="gamer"]{--ui-bg:#071326;--ui-panel:#0d1d36;--ui-accent:#00E5FF;--ui-accent-2:#39ff14}
+body[data-theme="kawaii"]{--ui-bg:#fff0f5;--ui-panel:#fff;--ui-text:#39205f;--ui-accent:#FF69B4;--ui-accent-2:#87CEEB}
+body[data-theme="brasil"]{--ui-bg:#f0fff0;--ui-panel:#fff;--ui-text:#1a3d1a;--ui-accent:#00A859;--ui-accent-2:#FFCC29}
+
+.top{background:color-mix(in srgb,var(--ui-bg) 88%, transparent);backdrop-filter:blur(12px);border-bottom:2px solid var(--ui-line)}
+.card{background:var(--ui-panel);border:1px solid var(--ui-line);border-radius:var(--ui-radius);box-shadow:var(--ui-glow)}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--ui-accent),var(--ui-accent-2))}
+.primary{background:linear-gradient(135deg,var(--ui-accent),var(--ui-accent-2));box-shadow:var(--ui-glow)}
+.scan-line{position:absolute;left:0;right:0;height:3px;background:var(--ui-accent);box-shadow:0 0 12px var(--ui-accent);animation:scan 3s linear infinite}
+@keyframes scan{0%{top:0}100%{top:100%}}:root{--purple:#39205f;--purple-dark:#21143d;--purple-mid:#65429a;--pink:#b58a42;--pink-dark:#896329;--gold:#d8b76a;--cream:#fffefa;--lav:#f3eff8;--line:#e1d9e9;--text:#292336;--muted:#827b8d}
 body{font:14px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:radial-gradient(ellipse at 50% 0,#fff 0,#f4f0f8 58%,#eee8f4 100%);color:var(--text)}
 .top{background:linear-gradient(110deg,#26153f,#432365 65%,#55327b);border-bottom:3px solid #d8b76a;box-shadow:0 5px 22px #21143d22}
 .topi{width:min(1280px,calc(100% - 40px));min-height:72px;padding:10px 4px;gap:22px}.brand{font-size:27px;letter-spacing:-1.2px}.brand img{width:44px;height:44px}
