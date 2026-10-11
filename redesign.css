@@ -1,17 +1,40 @@
-/* SoCialBr - Quando escolhe capa, TUDO vira aquele tema */
-:root{--ui-bg:#071326;--ui-panel:#0d1b33;--ui-line:#23385e;--ui-text:#edf3ff;--ui-muted:#aab8d3;--ui-accent:#00E5FF;--ui-accent-2:#a855f7;--ui-glow:0 0 12px #00E5FF55;--ui-radius:16px;--cover-img:none}
-*{box-sizing:border-box;transition:all.5s ease}
-body{background:var(--ui-bg);color:var(--ui-text);margin:0;font:14px Inter,system-ui}
-body::before{content:'';position:fixed;inset:0;background:var(--cover-img) center/cover no-repeat;opacity:.15;mix-blend-mode:soft-light;pointer-events:none;z-index:-1}
+// SoCialBr - App limpo, tema transforma TUDO
+const K='sb_token', C='sb_convite'; let me=null;
+const api=async(p,b,m)=>{const r=await fetch('/api/'+p,{method:m||(b?'POST':'GET'),headers:{'content-type':'application/json',authorization:'Bearer '+(localStorage[K]||'')},body:b?JSON.stringify(b):undefined});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.erro||'Erro');return d};
+const h=(t,a,...k)=>{const e=document.createElement(t);if(a)Object.assign(e,a);k.flat().forEach(x=>e.append(x??''));return e};
+const show=(...k)=>{document.getElementById('app').replaceChildren(...k)};
 
-body[data-theme="zombie"]{--ui-bg:#0a0a14;--ui-panel:#141423;--ui-accent:#7FFF00;--ui-accent-2:#3cff00;--ui-line:#7FFF00;--ui-glow:0 0 14px #7FFF00;--ui-radius:4px;--cover-img:url('./logo-grande.png')}
-body[data-theme="glitter"]{--ui-bg:#2A1F3B;--ui-panel:#3a2e57;--ui-accent:#8A5CC8;--ui-accent-2:#FFD166;--ui-glow:0 0 20px #8A5CC8}
-body[data-theme="emo"]{--ui-bg:#0a0a0a;--ui-panel:#151515;--ui-accent:#6a2a8a;--ui-accent-2:#ff1a4a;--ui-radius:2px}
-body[data-theme="gamer"]{--ui-bg:#071326;--ui-panel:#0d1d36;--ui-accent:#00E5FF;--ui-accent-2:#39ff14}
-body[data-theme="kawaii"]{--ui-bg:#fff0f5;--ui-panel:#fff;--ui-text:#39205f;--ui-accent:#FF69B4;--ui-accent-2:#87CEEB;--ui-radius:22px}
-body[data-theme="brasil"]{--ui-bg:#f0fff0;--ui-panel:#fff;--ui-text:#1a3d1a;--ui-accent:#00A859;--ui-accent-2:#FFCC29}
+const temas=[
+ {id:'zombie',nome:'Dark Zombie',emoji:'🧟'},
+ {id:'glitter',nome:'Retro Glitter',emoji:'💜'},
+ {id:'emo',nome:'Emo 2007',emoji:'🖤'},
+ {id:'gamer',nome:'Gamer Neon',emoji:'🎮'},
+ {id:'kawaii',nome:'Kawaii',emoji:'💖'},
+ {id:'brasil',nome:'Brasil',emoji:'🇧🇷'},
+];
 
-.top{background:color-mix(in srgb,var(--ui-bg) 90%, transparent);backdrop-filter:blur(12px);border-bottom:2px solid var(--ui-line);padding:12px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:10}
-.card{background:var(--ui-panel);border:1px solid var(--ui-line);border-radius:var(--ui-radius);padding:16px;margin:12px 0;box-shadow:var(--ui-glow);position:relative}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--ui-accent),var(--ui-accent-2))}
-button.primary{background:linear-gradient(135deg,var(--ui-accent),var(--ui-accent-2));color:#fff;border:0;padding:10px 16px;border-radius:var(--ui-radius);font-weight:700;cursor:pointer;box-shadow:var(--ui-glow)}
+function aplicarTema(id){
+ localStorage.setItem('sb_theme',id);
+ document.body.dataset.theme=id;
+}
+
+async function start(){
+ const q=new URLSearchParams(location.search).get('convite'); if(q){localStorage[C]=q;history.replaceState(null,'','/')}
+ if(!localStorage[K]) return entrar();
+ try{me=await api('eu')}catch{localStorage.removeItem(K);return entrar()}
+ if(localStorage[C]){try{const r=await api('convites/aceitar',{token:localStorage[C]});localStorage.removeItem(C);return grupo(r.group_id)}catch{}}
+ lista();
+}
+function entrar(){
+ const n=h('input',{placeholder:'Seu nome'}); show(h('div',{className:'card'},h('h2',0,'Bem-vindo ao SoCialBr'),n,h('button',{className:'primary',onclick:async()=>{const r=await api('registrar',{nome:n.value});localStorage[K]=r.token;start()}},'Entrar')));
+}
+async function lista(){
+ const gs=await api('grupos').catch(()=>[]);
+ const temaAtual=localStorage.getItem('sb_theme')||'gamer';
+ const aparencia=h('div',{className:'card'},h('h3',0,'Escolha seu estilo - TUDO vira esse tema'),h('div',{style:'display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px'},...temas.map(t=>{const b=h('button',{className:temaAtual===t.id?'primary':'',style:'padding:16px'},t.emoji+' '+t.nome);b.onclick=()=>{aplicarTema(t.id);lista()};return b})),h('small',0,'Ao escolher, fundo, botões, bordas, tudo transforma. Era isso que você queria!'));
+ show(h('div',{},h('small',0,'Olá, '+me.nome),aparencia,...gs.map(g=>h('div',{className:'card'},g.nome,h('button',{className:'primary',onclick:()=>grupo(g.id)},'Abrir')))));
+}
+
+document.getElementById('tabs').onclick=e=>{if(e.target.dataset.tab==='aparencia'){const t=localStorage.getItem('sb_theme')||'gamer';aplicarTema(t); lista()}};
+aplicarTema(localStorage.getItem('sb_theme')||'gamer');
+start();
